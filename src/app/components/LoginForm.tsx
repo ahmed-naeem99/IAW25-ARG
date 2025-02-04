@@ -3,8 +3,6 @@
 import React from "react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import Image from "next/image";
-import realityQuestLogo from "../../../public/rqlogo.svg";
 import { signIn } from "next-auth/react";
 
 export default function LoginForm() {
@@ -20,32 +18,19 @@ export default function LoginForm() {
   const router = useRouter();
 
   const handleLogin = async () => {
-    setErrorMessages({
-      username: "",
-      password: "",
-      general: "",
-    });
+    setErrorMessages({ username: "", password: "", general: "" });
     const isUsernameValid = validateUsername(username);
-
     setIsUserValid(isUsernameValid);
 
     if (isUsernameValid) {
-      // Proceed with sign-in logic
-      console.log("Signing in...");
       const response = await signIn("credentials", {
-        username: username,
-        password: password,
+        username,
+        password,
         redirect: false,
       });
 
-      console.log({ response });
-
       if (!response?.error) {
-        setErrorMessages({
-          username: "",
-          password: "",
-          general: "",
-        });
+        setErrorMessages({ username: "", password: "", general: "" });
         router.push("/");
         router.refresh();
       } else {
@@ -53,8 +38,7 @@ export default function LoginForm() {
           case "InvalidUsername":
             setErrorMessages((prev) => ({
               ...prev,
-              username:
-                "Invalid username format. Username must be 3-36 characters long and contain only letters, numbers, and underscores.",
+              username: "Invalid username format. Must be 3-36 characters long.",
             }));
             break;
           case "IncorrectPassword":
@@ -81,25 +65,26 @@ export default function LoginForm() {
       setErrorMessages((prev) => ({
         ...prev,
         username:
-          "Invalid username format. Username must be 3-36 characters long and contain only letters, numbers, and underscores.",
+          "Invalid username format. Must be 3-36 characters long and contain only letters, numbers, and underscores.",
       }));
     }
   };
 
   const validateUsername = (username: string) => {
-    // Regular expression for username validation
     const usernameRegex = /^[a-zA-Z0-9_]{3,36}$/;
     return usernameRegex.test(username);
   };
 
   return (
-    <div className="grid place-items-center ">
+    <div className="grid place-items-center">
       <div className="flex flex-1 flex-col justify-center pb-16 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm flex flex-col items-center">
-          <Image priority src={realityQuestLogo} alt="Logo" width={300} />
-          <h2 className="mt-6 text-center text-2xl font-bold leading-9 tracking-tight text-sky-950 dark:text-white">
-            Sign in to your Team Account
+          <h2 className="mt-6 text-center text-3xl font-bold leading-9 tracking-tight text-sky-950 dark:text-white">
+            Welcome to the Islamic Awareness Week <br /> Augmented Reality Quest
           </h2>
+          <p className="mt-2 text-center text-gray-600 dark:text-gray-400">
+            Sign in with your team username and email.
+          </p>
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
@@ -107,15 +92,15 @@ export default function LoginForm() {
             <div>
               <label
                 htmlFor="username"
-                className="block text-sm font-medium leading-6  text-dark dark:text-white"
+                className="block text-sm font-medium leading-6 text-dark dark:text-white"
               >
-                Team Name
+                Team Username
               </label>
               <div className="mt-2">
                 <input
                   id="username"
                   name="username"
-                  type="text" // Changed to text type for username input
+                  type="text"
                   autoComplete="username"
                   onChange={(e) => setUsername(e.target.value)}
                   required
@@ -130,19 +115,12 @@ export default function LoginForm() {
             </div>
 
             <div>
-              <div className="flex items-center justify-between">
-                <label
-                  htmlFor="password"
-                  className="block text-sm font-medium leading-6  text-dark dark:text-white"
-                >
-                  Password
-                </label>
-                <div className="text-sm">
-                  <div className="cursor-pointer font-semibold text-sky-600 hover:text-sky-500 px-2">
-                    Forgot password? Make a New Account.
-                  </div>
-                </div>
-              </div>
+              <label
+                htmlFor="password"
+                className="block text-sm font-medium leading-6 text-dark dark:text-white"
+              >
+                Password
+              </label>
               <div className="mt-2">
                 <input
                   id="password"
