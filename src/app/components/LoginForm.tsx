@@ -83,7 +83,7 @@ export default function LoginForm() {
             Welcome to the Islamic Awareness Week <br /> Augmented Reality Quest
           </h2>
           <p className="mt-2 text-center text-gray-600 dark:text-gray-400">
-            Sign in with your team username and email.
+            Sign in with your team username and password.
           </p>
         </div>
 
