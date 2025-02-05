@@ -4,6 +4,7 @@ import React from "react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { signIn } from "next-auth/react";
+import Image from "next/image";
 
 export default function LoginForm() {
   const [username, setUsername] = useState("");
@@ -79,12 +80,10 @@ export default function LoginForm() {
     <div className="grid place-items-center">
       <div className="flex flex-1 flex-col justify-center pb-16 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm flex flex-col items-center">
-          <h2 className="mt-6 text-center text-3xl font-bold leading-9 tracking-tight text-sky-950 dark:text-white">
-            Welcome to the Islamic Awareness Week <br /> Augmented Reality Quest
+          <Image src="/title 3.svg" alt="Logo" width={150} height={150} className="mb-4" />
+          <h2 className="text-center text-xl font-semibold text-sky-950 dark:text-white">
+            Welcome to the Islamic Awareness Week Augmented Reality Quest
           </h2>
-          <p className="mt-2 text-center text-gray-600 dark:text-gray-400">
-            Sign in with your team username and password.
-          </p>
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
