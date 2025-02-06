@@ -80,9 +80,14 @@ export default function LoginForm() {
     <div className="grid place-items-center">
       <div className="flex flex-1 flex-col justify-center pb-16 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm flex flex-col items-center">
-          <Image src="/title 3.svg" alt="Logo" width={150} height={150} className="mb-4" />
-          <h2 className="text-center text-xl font-semibold text-sky-950 dark:text-white">
-            Welcome to the Islamic Awareness Week Augmented Reality Quest
+          <Image
+            src="/4.svg"
+            alt="Islamic Awareness Week Logo"
+            width={150}
+            height={150}
+          />
+          <h2 className="mt-6 text-center text-2xl font-medium leading-9 tracking-tight text-sky-950 dark:text-white">
+            Welcome to the Islamic Awareness Week <br /> Augmented Reality Quest
           </h2>
         </div>
 
@@ -150,7 +155,7 @@ export default function LoginForm() {
           </div>
 
           <p className="mt-10 text-center text-sm text-gray-400">
-            Haven&apos;t made a team account?{" "}
+            Haven&apos;t made a team account? {" "}
             <button
               onClick={() => router.push("register")}
               className="font-semibold leading-6 text-sky-600 hover:text-sky-500"
