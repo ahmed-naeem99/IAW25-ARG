@@ -139,7 +139,16 @@ export default function RegisterForm() {
     <div className="grid place-items-center">
       <div className="flex flex-1 flex-col justify-center pb-16 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm flex flex-col items-center">
-          <Image priority src={newLogo} alt="Logo" width={300} /> {/* Updated logo */}
+          {/* Updated Logo */}
+          <div style={{ width: 300, height: 150, position: "relative" }}>
+            <Image
+              src={newLogo}
+              alt="Islamic Awareness Week Logo"
+              width={300}
+              height={150}
+              priority
+            />
+          </div>
           <h2 className="px-2 mt-4 text-center text-2xl font-bold leading-9 tracking-tight text-dark dark:text-white">
             Create a New Team Account
           </h2>
@@ -194,8 +203,12 @@ export default function RegisterForm() {
                   }
                   className="block px-3 w-full rounded-md border-0 bg-black/5 dark:bg-white/5 py-1.5 text-black dark:text-white shadow-sm ring-1 ring-inset ring-black/5 dark:ring-white/10 focus:ring-2 focus:ring-inset focus:ring-sky-500 sm:text-sm sm:leading-6"
                 >
-                  <option value="team">I am already part of a team</option>
-                  <option value="solo">I am solo</option>
+                  <option value="team" className="text-black">
+                    I am already part of a team
+                  </option>
+                  <option value="solo" className="text-black">
+                    I am solo
+                  </option>
                 </select>
               </div>
             </div>
