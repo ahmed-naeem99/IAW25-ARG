@@ -73,7 +73,7 @@ const NavBar = async () => {
           href="/"
           className="btn btn-ghost text-lg sm:text-3xl px-0 sm:px-4 font-normal"
         >
-          <div className={poseyFont.className}>Extreme Reality Quest</div>
+          <div className={poseyFont.className}>TMU MSA</div>
         </Link>
       </div>
       <div className="navbar-center hidden lg:flex">

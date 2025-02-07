@@ -6,16 +6,19 @@ import { useState, ChangeEvent } from "react";
 import Image from "next/image";
 import newLogo from "../../../public/4.svg"; // Updated logo import
 
-export default function LoginForm() {
+export default function RegisterForm() {
+  const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [rePassword, setRePassword] = useState("");
   const [teamMembers, setTeamMembers] = useState(""); // New state for team members
+  const [teamStatus, setTeamStatus] = useState<"team" | "solo">("team"); // New state for team status
   const [isUserValid, setIsUserValid] = useState(true);
   const [isEmailValid, setIsEmailValid] = useState(true);
   const [isPasswordValid, setIsPasswordValid] = useState(true);
   const [errorMessages, setErrorMessages] = useState({
+    fullName: "",
     email: "",
     username: "",
     password: "",
@@ -101,6 +104,7 @@ export default function LoginForm() {
 
     if (isEmailValid && isUsernameValid && isPasswordValid) {
       setErrorMessages({
+        fullName: "",
         email: "",
         username: "",
         password: "",
@@ -111,10 +115,11 @@ export default function LoginForm() {
       const response = await fetch("/api/auth/register", {
         method: "POST",
         body: JSON.stringify({
-          email: email,
-          username: username,
-          password: password,
-          teamMembers: teamMembers, // Include team members in the request
+          fullName,
+          email,
+          username: teamStatus === "solo" ? fullName : username, // Use full name as username if solo
+          password,
+          teamMembers: teamStatus === "team" ? teamMembers : "1", // Set team members to 1 if solo
         }),
       });
       console.log({ response });
@@ -145,10 +150,89 @@ export default function LoginForm() {
 
         <div className="mt-10 sm:mx-auto sm:w-full max-w-xs flex flex-col">
           <div className="space-y-6">
+            {/* Full Name Field */}
+            <div>
+              <label
+                htmlFor="fullName"
+                className="block text-sm font-medium leading-6 text-dark dark:text-white"
+              >
+                Full Name
+              </label>
+              <div className="mt-2">
+                <input
+                  id="fullName"
+                  name="fullName"
+                  type="text"
+                  autoComplete="name"
+                  onChange={(e) => setFullName(e.target.value)}
+                  required
+                  className="block px-3 w-full rounded-md border-0 bg-black/5 dark:bg-white/5 py-1.5 text-black dark:text-white shadow-sm ring-1 ring-inset ring-black/5 dark:ring-white/10 focus:ring-2 focus:ring-inset focus:ring-sky-500 sm:text-sm sm:leading-6"
+                />
+                {errorMessages.fullName && (
+                  <p className="text-red-500 pt-3 w-full max-w-xs">
+                    {errorMessages.fullName}
+                  </p>
+                )}
+              </div>
+            </div>
+
+            {/* Team Status Dropdown */}
+            <div>
+              <label
+                htmlFor="teamStatus"
+                className="block text-sm font-medium leading-6 text-dark dark:text-white"
+              >
+                Team Status
+              </label>
+              <div className="mt-2">
+                <select
+                  id="teamStatus"
+                  name="teamStatus"
+                  value={teamStatus}
+                  onChange={(e) =>
+                    setTeamStatus(e.target.value as "team" | "solo")
+                  }
+                  className="block px-3 w-full rounded-md border-0 bg-black/5 dark:bg-white/5 py-1.5 text-black dark:text-white shadow-sm ring-1 ring-inset ring-black/5 dark:ring-white/10 focus:ring-2 focus:ring-inset focus:ring-sky-500 sm:text-sm sm:leading-6"
+                >
+                  <option value="team">I am already part of a team</option>
+                  <option value="solo">I am solo</option>
+                </select>
+              </div>
+            </div>
+
+            {/* Team Name Field (Conditional) */}
+            {teamStatus === "team" && (
+              <div>
+                <label
+                  htmlFor="username"
+                  className="block text-sm font-medium leading-6 text-dark dark:text-white"
+                >
+                  Team Name
+                </label>
+                <div className="mt-2">
+                  <input
+                    id="username"
+                    name="username"
+                    type="text"
+                    autoComplete="username"
+                    onChange={(e) => setUsername(e.target.value)}
+                    required
+                    className="block px-3 w-full rounded-md border-0 bg-black/5 dark:bg-white/5 py-1.5 text-black dark:text-white shadow-sm ring-1 ring-inset ring-black/5 dark:ring-white/10 focus:ring-2 focus:ring-inset focus:ring-sky-500 sm:text-sm sm:leading-6"
+                  />
+                  {errorMessages.username && (
+                    <p className="text-red-500 pt-3 w-full max-w-xs">
+                      {errorMessages.username}
+                    </p>
+                  )}
+                </div>
+              </div>
+            )}
+
+            {/* Email Field */}
             <div>
               <label
                 htmlFor="email"
-                className="block text-sm font-medium leading-6  text-dark dark:text-white"
+                className="block text-sm font-medium leading-6 text-dark dark:text-white"
               >
                 Email address
               </label>
@@ -158,9 +242,7 @@ export default function LoginForm() {
                   name="email"
                   type="text"
                   autoComplete="email"
-                  onChange={(e) => {
-                    setEmail(e.target.value);
-                  }}
+                  onChange={(e) => setEmail(e.target.value)}
                   required
                   className="block px-3 w-full rounded-md border-0 bg-black/5 dark:bg-white/5 py-1.5 text-black dark:text-white shadow-sm ring-1 ring-inset ring-black/5 dark:ring-white/10 focus:ring-2 focus:ring-inset focus:ring-sky-500 sm:text-sm sm:leading-6"
                 />
@@ -172,58 +254,35 @@ export default function LoginForm() {
               </div>
             </div>
 
-            <div>
-              <label
-                htmlFor="username"
-                className="block text-sm font-medium leading-6  text-dark dark:text-white"
-              >
-                Team Name
-              </label>
-              <div className="mt-2">
-                <input
-                  id="username"
-                  name="username"
-                  type="text"
-                  autoComplete="username"
-                  onChange={(e) => {
-                    setUsername(e.target.value);
-                  }}
-                  required
-                  className="block px-3 w-full rounded-md border-0 bg-black/5 dark:bg-white/5 py-1.5 text-black dark:text-white shadow-sm ring-1 ring-inset ring-black/5 dark:ring-white/10 focus:ring-2 focus:ring-inset focus:ring-sky-500 sm:text-sm sm:leading-6"
-                />
-                {errorMessages.username && (
-                  <p className="text-red-500 pt-3 w-full max-w-xs">
-                    {errorMessages.username}
-                  </p>
-                )}
+            {/* Team Members Field (Conditional) */}
+            {teamStatus === "team" && (
+              <div>
+                <label
+                  htmlFor="teamMembers"
+                  className="block text-sm font-medium leading-6 text-dark dark:text-white"
+                >
+                  Number of Team Members
+                </label>
+                <div className="mt-2">
+                  <input
+                    id="teamMembers"
+                    name="teamMembers"
+                    type="number"
+                    min="1"
+                    onChange={(e) => setTeamMembers(e.target.value)}
+                    required
+                    className="block px-3 w-full rounded-md border-0 bg-black/5 dark:bg-white/5 py-1.5 text-black dark:text-white shadow-sm ring-1 ring-inset ring-black/5 dark:ring-white/10 focus:ring-2 focus:ring-inset focus:ring-sky-500 sm:text-sm sm:leading-6"
+                  />
+                </div>
               </div>
-            </div>
+            )}
 
-            <div>
-              <label
-                htmlFor="teamMembers"
-                className="block text-sm font-medium leading-6  text-dark dark:text-white"
-              >
-                Number of Team Members
-              </label>
-              <div className="mt-2">
-                <input
-                  id="teamMembers"
-                  name="teamMembers"
-                  type="number"
-                  min="1"
-                  onChange={(e) => setTeamMembers(e.target.value)}
-                  required
-                  className="block px-3 w-full rounded-md border-0 bg-black/5 dark:bg-white/5 py-1.5 text-black dark:text-white shadow-sm ring-1 ring-inset ring-black/5 dark:ring-white/10 focus:ring-2 focus:ring-inset focus:ring-sky-500 sm:text-sm sm:leading-6"
-                />
-              </div>
-            </div>
-
+            {/* Password Fields */}
             <div>
               <div className="flex items-center justify-between">
                 <label
                   htmlFor="password"
-                  className="block text-sm font-medium leading-6  text-dark dark:text-white"
+                  className="block text-sm font-medium leading-6 text-dark dark:text-white"
                 >
                   Password
                 </label>
@@ -250,7 +309,7 @@ export default function LoginForm() {
               <div className="flex items-center justify-between">
                 <label
                   htmlFor="password"
-                  className="block text-sm font-medium leading-6  text-dark dark:text-white"
+                  className="block text-sm font-medium leading-6 text-dark dark:text-white"
                 >
                   Re-enter Password
                 </label>
@@ -268,11 +327,16 @@ export default function LoginForm() {
               </div>
             </div>
 
+            {/* Sign Up Button */}
             <div>
               <button
                 onClick={handleSignUp}
                 disabled={
-                  !email || !password || !username || !rePassword || !teamMembers
+                  !fullName ||
+                  !email ||
+                  !password ||
+                  !rePassword ||
+                  (teamStatus === "team" && (!username || !teamMembers))
                 }
                 className="disabled:opacity-40 flex w-full justify-center rounded-md bg-sky-800 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-sky-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
               >
