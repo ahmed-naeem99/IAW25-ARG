@@ -143,7 +143,7 @@ export default function RegisterForm() {
       <div className="flex flex-1 flex-col justify-center pb-16 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm flex flex-col items-center">
           {/* Updated Logo */}
-          <div style={{ width: 300, height: 150, position: "relative" }}>
+          <div style={{ width: 250, height: 175, position: "relative" }}>
             <Image
               src="/3.svg"
               alt="Islamic Awareness Week Logo"

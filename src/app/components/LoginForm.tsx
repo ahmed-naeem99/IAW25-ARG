@@ -29,6 +29,7 @@ export default function LoginForm() {
         password,
         redirect: false,
       });
+      console.log("signIn response:", response); 
 
       if (!response?.error) {
         setErrorMessages({ username: "", password: "", general: "" });
