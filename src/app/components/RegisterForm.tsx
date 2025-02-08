@@ -4,7 +4,6 @@ import React from "react";
 import { useRouter } from "next/navigation";
 import { useState, ChangeEvent } from "react";
 import Image from "next/image";
-import newLogo from "../../../public/4.svg"; // Updated logo import
 
 export default function RegisterForm() {
   const [fullName, setFullName] = useState("");
@@ -12,8 +11,8 @@ export default function RegisterForm() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [rePassword, setRePassword] = useState("");
-  const [teamMembers, setTeamMembers] = useState(""); // New state for team members
-  const [teamStatus, setTeamStatus] = useState<"team" | "solo">("team"); // New state for team status
+  const [teamMembers, setTeamMembers] = useState("");
+  const [teamStatus, setTeamStatus] = useState<"team" | "solo">("team");
   const [isUserValid, setIsUserValid] = useState(true);
   const [isEmailValid, setIsEmailValid] = useState(true);
   const [isPasswordValid, setIsPasswordValid] = useState(true);
@@ -114,16 +113,20 @@ export default function RegisterForm() {
       console.log("Signing up...");
       const response = await fetch("/api/auth/register", {
         method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify({
           fullName,
           email,
-          username: teamStatus === "solo" ? fullName : username, // Use full name as username if solo
+          username: teamStatus === "solo" ? fullName : username,
           password,
-          teamMembers: teamStatus === "team" ? teamMembers : "1", // Set team members to 1 if solo
+          teamMembers: teamStatus === "team" ? teamMembers : "1",
         }),
       });
-      console.log({ response });
+      console.log("Response status:", response.status);
       const result = await response.json();
+      console.log("Response data:", result);
       if (response.status === 200) {
         router.push("/login");
         router.refresh();
@@ -142,7 +145,7 @@ export default function RegisterForm() {
           {/* Updated Logo */}
           <div style={{ width: 300, height: 150, position: "relative" }}>
             <Image
-              src={newLogo}
+              src="/4.svg"
               alt="Islamic Awareness Week Logo"
               width={300}
               height={150}
@@ -154,7 +157,7 @@ export default function RegisterForm() {
           </h2>
           <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
             Register your team here.
-          </p> {/* Added subtitle */}
+          </p>
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full max-w-xs flex flex-col">
