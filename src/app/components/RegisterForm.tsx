@@ -129,7 +129,6 @@ export default function RegisterForm() {
       console.log("Response data:", result);
       if (response.status === 200) {
         router.push("/login");
-        router.refresh();
       } else {
         handleServerErrors(result);
       }
