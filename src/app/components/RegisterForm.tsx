@@ -145,10 +145,10 @@ export default function RegisterForm() {
           {/* Updated Logo */}
           <div style={{ width: 300, height: 150, position: "relative" }}>
             <Image
-              src="/4.svg"
+              src="/3.svg"
               alt="Islamic Awareness Week Logo"
-              width={300}
-              height={150}
+              width={150}
+              height={75}
               priority
             />
           </div>
