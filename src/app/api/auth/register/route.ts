@@ -10,8 +10,8 @@ export async function POST(request: Request) {
     console.log("Received request to /api/auth/register");
 
     // Parse the request body
-    const { email, username, password } = await request.json();
-    console.log("Request body:", { email, username, password });
+    const { email, username, password, fullName, teamMembers } = await request.json();
+    console.log("Request body:", { email, username, password, fullName, teamMembers });
 
     // Validate email and username
     if (
@@ -75,8 +75,8 @@ export async function POST(request: Request) {
     // Insert the user into the database
     console.log("Inserting user into the database...");
     const response = await sql`
-      INSERT INTO users (email, username, password)
-      VALUES (${email}, ${username}, ${hashedPassword})
+      INSERT INTO users (email, username, password, full_name, team_members)
+      VALUES (${email}, ${username}, ${hashedPassword}, ${fullName}, ${teamMembers})
     `;
     console.log("User inserted successfully:", response);
 
