@@ -83,8 +83,9 @@ export async function POST(request: Request) {
     // Return success response
     return NextResponse.json({ message: "Success" });
   } catch (e: any) {
+    console.log("Error object:", e); // Add this line
     console.error("Error in /api/auth/register:", e);
-    console.error("Full error object:", JSON.stringify(e, null, 2)); // Log the full error object
+    console.error("Full error object:", JSON.stringify(e, null, 2));
 
     // Handle specific database errors
     if (e.code === "23505") {
