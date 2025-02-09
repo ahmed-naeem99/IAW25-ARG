@@ -4,6 +4,7 @@ import { sql } from "@vercel/postgres";
 
 const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 const usernameRegex = /^[a-zA-Z0-9_]{3,36}$/;
+console.log("POSTGRES_URL:", process.env.POSTGRES_URL);
 
 export async function POST(request: Request) {
   try {
