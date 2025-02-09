@@ -14,55 +14,25 @@ export async function POST(request: Request) {
     console.log("Request body:", { email, username, password, fullName, teamMembers });
 
     // Validate email and username
-    if (
-      (!username || !usernameRegex.test(username)) &&
-      (!email || !emailRegex.test(email))
-    ) {
-      console.log("Invalid email and username format");
+    if (!username || !usernameRegex.test(username)) {
+      console.log("Invalid username format");
       return NextResponse.json(
-        {
-          message: "Invalid email and username format",
-          code: "INVALID_EMAIL_USERNAME_FORMAT",
-        },
-        {
-          status: 400,
-        }
+        { message: "Invalid username format", code: "INVALID_USERNAME_FORMAT" },
+        { status: 400 }
       );
     }
     if (!email || !emailRegex.test(email)) {
       console.log("Invalid email format");
       return NextResponse.json(
-        {
-          message: "Invalid email format",
-          code: "INVALID_EMAIL_FORMAT",
-        },
-        {
-          status: 400,
-        }
-      );
-    }
-    if (!username || !usernameRegex.test(username)) {
-      console.log("Invalid username format");
-      return NextResponse.json(
-        {
-          message: "Invalid username format",
-          code: "INVALID_USERNAME_FORMAT",
-        },
-        {
-          status: 400,
-        }
+        { message: "Invalid email format", code: "INVALID_EMAIL_FORMAT" },
+        { status: 400 }
       );
     }
     if (!password) {
       console.log("Password is required");
       return NextResponse.json(
-        {
-          message: "Password is required",
-          code: "PASSWORD_REQUIRED",
-        },
-        {
-          status: 400,
-        }
+        { message: "Password is required", code: "PASSWORD_REQUIRED" },
+        { status: 400 }
       );
     }
 
@@ -72,22 +42,40 @@ export async function POST(request: Request) {
     const hashedPassword = await hash(password, 10);
     console.log("Password hashed successfully");
 
+    // Ensure teamMembers is properly formatted (JSON string for PostgreSQL)
+    const formattedTeamMembers = JSON.stringify(teamMembers || []);
+
     // Insert the user into the database
-    console.log("Inserting user into the database...");
-    const response = await sql`
-      INSERT INTO users (email, username, password, full_name, team_members)
-      VALUES (${email}, ${username}, ${hashedPassword}, ${fullName}, ${teamMembers})
-    `;
-    console.log("User inserted successfully:", response);
+    try {
+      console.log("Inserting user into the database...");
+      const response = await sql`
+        INSERT INTO users (email, username, password, full_name, team_members)
+        VALUES (${email}, ${username}, ${hashedPassword}, ${fullName}, ${formattedTeamMembers})
+      `;
+      console.log("User inserted successfully:", response);
+    } catch (dbError: any) {
+      console.error("Database error:", dbError);
+      return NextResponse.json(
+        { message: "Database error", code: "DB_ERROR", details: dbError.message },
+        { status: 500 }
+      );
+    }
 
     // Return success response
     return NextResponse.json({ message: "Success" });
   } catch (e: any) {
-    console.log("Error object:", e); // Add this line
     console.error("Error in /api/auth/register:", e);
-    console.error("Full error object:", JSON.stringify(e, null, 2));
+    
+    // Log detailed error properties
+    console.error("Error name:", e.name);
+    console.error("Error message:", e.message);
+    console.error("Error stack:", e.stack);
 
-    // Handle specific database errors
+    if (e instanceof Error) {
+      console.error("Full error object:", JSON.stringify(e, Object.getOwnPropertyNames(e), 2));
+    }
+
+    // Handle database constraint errors
     if (e.code === "23505") {
       if (e.message.includes("unique_lowercase_email")) {
         console.log("Email already exists");
@@ -96,10 +84,7 @@ export async function POST(request: Request) {
           { status: 400 }
         );
       }
-      if (
-        e.message.includes("unique_username") ||
-        e.message.includes("unique_lowercase_username")
-      ) {
+      if (e.message.includes("unique_username")) {
         console.log("Username already exists");
         return NextResponse.json(
           { message: "Username already exists", code: "USERNAME_EXISTS" },
