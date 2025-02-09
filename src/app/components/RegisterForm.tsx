@@ -146,12 +146,12 @@ export default function RegisterForm() {
             <Image
               src="/3.svg"
               alt="Islamic Awareness Week Logo"
-              width={150}
-              height={75}
+              width={250}
+              height={250}
               priority
             />
           </div>
-          <h2 className="px-2 mt-4 text-center text-2xl font-bold leading-9 tracking-tight text-dark dark:text-white">
+          <h2 className="px-2 mt-12 text-center text-2xl font-bold leading-9 tracking-tight text-dark dark:text-white">
             Create a New Team Account
           </h2>
           <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
