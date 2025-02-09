@@ -67,6 +67,11 @@ const NavBar = async () => {
                 Leaderboard
               </Link>
             </li>
+            <li>
+              <Link className="dark:focus:text-white" href="/toolbox">
+                Toolbox
+              </Link>
+            </li>
           </ul>
         </div>
         <Link
