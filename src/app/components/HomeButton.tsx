@@ -14,9 +14,10 @@ const HomeButton = () => {
 
   const handleNavigation = () => {
     if (session.status === "authenticated") {
-      if (!(session.data.user.mission === -1)) {
-        router.push("/mission" + session.data.user.mission);
-      } else {
+      if (session.data?.user?.mission !== undefined &&
+        session.data.user.mission !== -1) {
+          router.push(`/mission${session.data.user.mission}`);
+        } else {
         router.push("/leaderboard");
       }
     } else {

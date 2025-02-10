@@ -7,7 +7,7 @@ import { NextAuthProvider } from "./components/NextAuthProvider";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "MAC Reality Quest",
+  title: "TMU MSA Reality Quest",
   description: "",
 };
 
