@@ -36,7 +36,7 @@ interface IItemRendererXProps {
 // DO NOT EXTEND FROM PureComponent!!! You might miss critical changes made deep within `item` prop
 // as far as efficiency is concerned, `react-aspen` works hard to ensure unnecessary updates are ignored
 export class FileTreeItem extends React.Component<IItemRendererXProps & IItemRendererProps> {
-  public static getBoundingClientRectForItem(item: FileEntry | Directory): DOMRect {
+  public static getBoundingClientRectForItem(item: FileEntry | Directory): DOMRect | null {
     const divRef = FileTreeItem.itemIdToRefMap.get(item.id);
     if (divRef) {
       return divRef.getBoundingClientRect();
@@ -50,11 +50,18 @@ export class FileTreeItem extends React.Component<IItemRendererXProps & IItemRen
   private static readonly refToItemIdMap: Map<number, HTMLDivElement> = new Map();
   private readonly fileTreeEvent: IFileTreeXTriggerEvents;
 
-  constructor(props) {
+  constructor(props: IItemRendererXProps & IItemRendererProps) {
     super(props);
-    // used to apply decoration changes, you're welcome to use setState or other mechanisms as you see fit
-    this.forceUpdate = this.forceUpdate.bind(this);
+    this.fileTreeEvent = {
+      ...props.events,
+      onEvent: (event: string, path: string): boolean => {
+        console.log(`Event triggered: ${event} at path: ${path}`);
+        return true; // Or some actual logic based on event type
+      }
+    };
   }
+  
+  
 
   public render() {
     const { item, itemType, decorations } = this.props;
