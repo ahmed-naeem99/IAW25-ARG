@@ -1,8 +1,9 @@
+"use client"; // Mark this as a Client Component
 import React from "react";
 import Link from "next/link";
 import ThemeToggle from "./ThemeToggle";
 import localFont from "next/font/local";
-import { getServerSession } from "next-auth";
+import { useSession } from "next-auth/react"; // Use useSession for client-side session
 import Logout from "./logout";
 import { motion } from "framer-motion"; // For animations
 
@@ -11,8 +12,9 @@ const poseyFont = localFont({
   src: "../../../public/fonts/posey-textured.ttf",
 });
 
-const NavBar = async () => {
-  const session = await getServerSession();
+const NavBar = () => {
+  const { data: session } = useSession(); // Use useSession for client-side session
+
   return (
     <motion.div
       initial={{ opacity: 0, y: -50 }}
