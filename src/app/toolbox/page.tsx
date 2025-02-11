@@ -16,7 +16,7 @@ export default function Toolbox() {
         </h1>
 
         {/* Embedded Slides */}
-        <div className="aspect-w-16 aspect-h-9 w-full max-w-6xl mx-auto">
+        <div className="w-full h-[70vh] max-w-6xl mx-auto"> {/* Adjusted height */}
           <iframe
             src="https://docs.google.com/presentation/d/1Cb-amO1lWNJkYqPNd6E-tbELLAaETtE3aRagHAoIr_4/edit?usp=sharing"
             frameBorder="0"
