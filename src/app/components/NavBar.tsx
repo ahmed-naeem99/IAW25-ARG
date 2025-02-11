@@ -72,6 +72,11 @@ const NavBar = async () => {
                 Toolbox
               </Link>
             </li>
+            <li>
+              <Link className="dark:focus:text-white" href="/faqs">
+                FAQs
+              </Link>
+            </li>
           </ul>
         </div>
         <Link
@@ -128,6 +133,14 @@ const NavBar = async () => {
               href="/toolbox"
             >
               Toolbox
+            </Link>
+          </li>
+          <li>
+            <Link
+              className="dark:focus:text-white dark:text-white"
+              href="/faqs"
+            >
+              FAQs
             </Link>
           </li>
         </ul>

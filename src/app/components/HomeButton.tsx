@@ -54,7 +54,7 @@ const HomeButton = () => {
         >
           <button
             onClick={handleNavigation}
-            className={`${poseyFont.className} btn bg-gray-700 text-white border-none hover:bg-gray-600 text-2xl font-light px-8 py-4 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300`}
+            className={`${poseyFont.className} btn bg-gray-700 text-white border-none hover:bg-gray-600 text-2xl font-light px-8 py-4 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center h-16`}
           >
             ENTER
           </button>
@@ -76,7 +76,7 @@ const HomeButton = () => {
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className={`${poseyFont.className} text-lg mb-8`}
+            className="font-sans text-lg font-light mb-8 leading-relaxed"
           >
             This competition will test your wits, creativity, critical thinking, and speed. Participate individually or as a team and embark on a journey to solve mysteries, complete challenges, and learn about an amazing episode in Muslim history.
           </motion.p>
@@ -88,7 +88,7 @@ const HomeButton = () => {
           >
             <div>
               <h4 className={`${poseyFont.className} text-2xl font-semibold mb-4`}>✨ What to Expect:</h4>
-              <ul className={`${poseyFont.className} list-disc list-inside text-lg`}>
+              <ul className="font-sans text-lg font-light list-disc list-inside leading-relaxed">
                 <li>A wide variety of puzzles, clues, ciphers, and challenges</li>
                 <li>Excitement as you run around campus with friends and teammates</li>
                 <li>Gift card prizes: $100 for 1st, $75 for 2nd, $50 for 3rd</li>
@@ -98,7 +98,7 @@ const HomeButton = () => {
             </div>
             <div>
               <h4 className={`${poseyFont.className} text-2xl font-semibold mb-4`}>Theme:</h4>
-              <p className={`${poseyFont.className} text-lg`}>
+              <p className="font-sans text-lg font-light leading-relaxed">
                 This year’s theme is <strong>A Journey With The Mongols</strong>. Discover how this pivotal moment in history unfolded in ways you could never imagine.
               </p>
             </div>
