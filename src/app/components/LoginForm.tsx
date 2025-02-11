@@ -78,7 +78,7 @@ export default function LoginForm() {
   };
 
   return (
-    <div className="grid place-items-center">
+    <div className="grid place-items-center min-h-screen bg-gradient-to-b from-gray-900 to-gray-800">
       <div className="flex flex-1 flex-col justify-center pb-16 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm flex flex-col items-center">
           <motion.div
@@ -97,7 +97,7 @@ export default function LoginForm() {
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="mt-6 text-center text-2xl font-medium leading-9 tracking-tight text-sky-950 dark:text-white"
+            className="mt-6 text-center text-2xl font-medium leading-9 tracking-tight text-white"
           >
             Welcome to the Islamic Awareness Week Augmented Reality Quest
           </motion.h2>
@@ -113,7 +113,7 @@ export default function LoginForm() {
             <div>
               <label
                 htmlFor="username"
-                className="block text-sm font-medium leading-6 text-dark dark:text-white"
+                className="block text-sm font-medium leading-6 text-white"
               >
                 Team Username (Or your name if you are solo)
               </label>
@@ -125,7 +125,7 @@ export default function LoginForm() {
                   autoComplete="username"
                   onChange={(e) => setUsername(e.target.value)}
                   required
-                  className="block px-3 w-full rounded-md border-0 bg-black/5 dark:bg-white/5 py-1.5 text-black dark:text-white shadow-sm ring-1 ring-inset ring-black/5 dark:ring-white/10 focus:ring-2 focus:ring-inset focus:ring-sky-500 sm:text-sm sm:leading-6"
+                  className="block px-3 w-full rounded-md border-0 bg-white/5 py-1.5 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-sky-500 sm:text-sm sm:leading-6"
                   whileFocus={{ scale: 1.02 }}
                 />
                 {errorMessages.username && (
@@ -143,7 +143,7 @@ export default function LoginForm() {
             <div>
               <label
                 htmlFor="password"
-                className="block text-sm font-medium leading-6 text-dark dark:text-white"
+                className="block text-sm font-medium leading-6 text-white"
               >
                 Password
               </label>
@@ -155,7 +155,7 @@ export default function LoginForm() {
                   autoComplete="current-password"
                   onChange={(e) => setPassword(e.target.value)}
                   required
-                  className="block px-3 w-full rounded-md border-0 bg-black/5 dark:bg-white/5 py-1.5 text-black dark:text-white shadow-sm ring-1 ring-inset ring-black/5 dark:ring-white/10 focus:ring-2 focus:ring-inset focus:ring-sky-500 sm:text-sm sm:leading-6"
+                  className="block px-3 w-full rounded-md border-0 bg-white/5 py-1.5 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-sky-500 sm:text-sm sm:leading-6"
                   whileFocus={{ scale: 1.02 }}
                 />
                 {errorMessages.password && (
