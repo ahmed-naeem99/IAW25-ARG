@@ -85,14 +85,14 @@ const NavBar = async () => {
         <ul className="menu menu-horizontal px-1">
           <li>
             <details>
-              <summary>Missions</summary>
+              <summary>Challenges</summary>
               <ul className="p-2 bg-sky-800">
                 <li>
                   <Link
                     className="dark:focus:text-white text-white"
                     href="/mission1"
                   >
-                    M1
+                    C1
                   </Link>
                 </li>
                 <li>
@@ -100,7 +100,7 @@ const NavBar = async () => {
                     className="dark:focus:text-white text-white"
                     href="/mission2"
                   >
-                    M2
+                    C2
                   </Link>
                 </li>
                 <li>
@@ -108,7 +108,7 @@ const NavBar = async () => {
                     className="dark:focus:text-white text-white"
                     href="/mission3"
                   >
-                    M3
+                    C3
                   </Link>
                 </li>
               </ul>
@@ -122,6 +122,12 @@ const NavBar = async () => {
               Leaderboard
             </Link>
           </li>
+          <Link
+              className="dark:focus:text-white dark:text-white"
+              href="/toolbox"
+            >
+              Toolbox
+            </Link>
         </ul>
       </div>
       <div className="navbar-end">
