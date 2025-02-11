@@ -40,24 +40,24 @@ const NavBar = async () => {
             className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow rounded-box w-52 bg-sky-800 text-white"
           >
             <li>
-              <a>Missions</a>
+              <a>Challenges</a>
               <ul className="p-2">
                 <li>
                   <Link
                     className="dark:focus:text-white dark:text-white"
                     href="/mission1"
                   >
-                    M1
+                    C1
                   </Link>
                 </li>
                 <li>
                   <Link className="dark:focus:text-white" href="/mission2">
-                    M2
+                    C2
                   </Link>
                 </li>
                 <li>
                   <Link className="dark:focus:text-white" href="/mission3">
-                    M3
+                    C3
                   </Link>
                 </li>
               </ul>
@@ -122,12 +122,14 @@ const NavBar = async () => {
               Leaderboard
             </Link>
           </li>
-          <Link
+          <li>
+            <Link
               className="dark:focus:text-white dark:text-white"
               href="/toolbox"
             >
               Toolbox
             </Link>
+          </li>
         </ul>
       </div>
       <div className="navbar-end">
