@@ -54,9 +54,14 @@ const HomeButton = () => {
         >
           <button
             onClick={handleNavigation}
-            className={`${poseyFont.className} btn bg-gray-700 text-white border-none hover:bg-gray-600 text-2xl font-light px-8 py-4 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center h-16`}
+            className={`${poseyFont.className} btn bg-gray-700 text-white border-none hover:bg-gray-600 text-2xl font-light px-8 py-4 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center h-16 relative overflow-hidden`}
           >
-            ENTER
+            <span className="relative z-10">ENTER</span>
+            <motion.div
+              className="absolute inset-0 bg-gradient-to-r from-sky-500 to-sky-700 opacity-0 hover:opacity-100 transition-opacity duration-300"
+              initial={{ opacity: 0 }}
+              whileHover={{ opacity: 1 }}
+            />
           </button>
         </motion.div>
       </div>
@@ -104,6 +109,15 @@ const HomeButton = () => {
             </div>
           </motion.div>
         </div>
+      </div>
+
+      {/* Animated Background Gradient */}
+      <div className="absolute inset-0 -z-10">
+        <motion.div
+          className="w-full h-full bg-gradient-to-r from-sky-900 to-gray-900 opacity-30"
+          animate={{ backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"] }}
+          transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
+        />
       </div>
     </div>
   );

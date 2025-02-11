@@ -4,7 +4,9 @@ import ThemeToggle from "./ThemeToggle";
 import localFont from "next/font/local";
 import { getServerSession } from "next-auth";
 import Logout from "./logout";
+import { motion } from "framer-motion"; // For animations
 
+// Load custom font
 const poseyFont = localFont({
   src: "../../../public/fonts/posey-textured.ttf",
 });
@@ -12,7 +14,12 @@ const poseyFont = localFont({
 const NavBar = async () => {
   const session = await getServerSession();
   return (
-    <div className="navbar dark:text-white dark:focus:text-white transition-colors rounded-3xl">
+    <motion.div
+      initial={{ opacity: 0, y: -50 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+      className="navbar dark:text-white dark:focus:text-white transition-colors rounded-3xl"
+    >
       <div className="navbar-start">
         <div className="dropdown">
           <div
@@ -42,43 +49,64 @@ const NavBar = async () => {
             <li>
               <a>Challenges</a>
               <ul className="p-2">
-                <li>
+                <motion.li
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
                   <Link
                     className="dark:focus:text-white dark:text-white"
                     href="/mission1"
                   >
                     C1
                   </Link>
-                </li>
-                <li>
+                </motion.li>
+                <motion.li
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
                   <Link className="dark:focus:text-white" href="/mission2">
                     C2
                   </Link>
-                </li>
+                </motion.li>
               </ul>
             </li>
-            <li>
+            <motion.li
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
               <Link className="dark:focus:text-white" href="/leaderboard">
                 Leaderboard
               </Link>
-            </li>
-            <li>
+            </motion.li>
+            <motion.li
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
               <Link className="dark:focus:text-white" href="/toolbox">
                 Toolbox
               </Link>
-            </li>
-            <li>
+            </motion.li>
+            <motion.li
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
               <Link className="dark:focus:text-white" href="/faqs">
                 FAQs
               </Link>
-            </li>
+            </motion.li>
           </ul>
         </div>
         <Link
           href="/"
           className="btn btn-ghost text-lg sm:text-3xl px-0 sm:px-4 font-normal"
         >
-          <div className={poseyFont.className}>TMU MSA</div>
+          <motion.div
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className={poseyFont.className}
+          >
+            TMU MSA
+          </motion.div>
         </Link>
       </div>
       <div className="navbar-center hidden lg:flex">
@@ -87,86 +115,113 @@ const NavBar = async () => {
             <details>
               <summary>Challenges</summary>
               <ul className="p-2 bg-sky-800">
-                <li>
+                <motion.li
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
                   <Link
                     className="dark:focus:text-white text-white"
                     href="/mission1"
                   >
                     C1
                   </Link>
-                </li>
-                <li>
+                </motion.li>
+                <motion.li
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
                   <Link
                     className="dark:focus:text-white text-white"
                     href="/mission2"
                   >
                     C2
                   </Link>
-                </li>
+                </motion.li>
               </ul>
             </details>
           </li>
-          <li>
+          <motion.li
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
             <Link
               className="dark:focus:text-white dark:text-white"
               href="/leaderboard"
             >
               Leaderboard
             </Link>
-          </li>
-          <li>
+          </motion.li>
+          <motion.li
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
             <Link
               className="dark:focus:text-white dark:text-white"
               href="/toolbox"
             >
               Toolbox
             </Link>
-          </li>
-          <li>
+          </motion.li>
+          <motion.li
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
             <Link
               className="dark:focus:text-white dark:text-white"
               href="/faqs"
             >
               FAQs
             </Link>
-          </li>
+          </motion.li>
         </ul>
       </div>
       <div className="navbar-end">
         <div className="dropdown dropdown-end flex flex-row space-x-2 sm:space-x-4 items-center">
           <ThemeToggle />
-          <div
-            tabIndex={0}
-            role="button"
-            className="btn btn-ghost btn-circle avatar"
+          <motion.div
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
           >
-            <div className="w-10 rounded-full">
-              <img
-                alt="Tailwind CSS Navbar component"
-                src="https://i.imgur.com/AJ3InNO.png"
-              />
+            <div
+              tabIndex={0}
+              role="button"
+              className="btn btn-ghost btn-circle avatar"
+            >
+              <div className="w-10 rounded-full">
+                <img
+                  alt="Tailwind CSS Navbar component"
+                  src="https://i.imgur.com/AJ3InNO.png"
+                />
+              </div>
             </div>
-          </div>
+          </motion.div>
           <ul
             tabIndex={0}
             className="mt-24 z-[1] p-2 shadow menu menu-sm dropdown-content rounded-box w-52 bg-sky-800"
           >
             {!session && (
-              <li>
+              <motion.li
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
                 <Link className="text-white justify-between" href="/login">
                   Login
                 </Link>
-              </li>
+              </motion.li>
             )}
             {!!session && (
-              <li className="text-white">
+              <motion.li
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="text-white"
+              >
                 <Logout />
-              </li>
+              </motion.li>
             )}
           </ul>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
