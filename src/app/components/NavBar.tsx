@@ -3,9 +3,10 @@ import React from "react";
 import Link from "next/link";
 import ThemeToggle from "./ThemeToggle";
 import localFont from "next/font/local";
-import { useSession } from "next-auth/react"; // Use useSession for client-side session
+import { useSession } from "next-auth/react";
 import Logout from "./logout";
 import { motion } from "framer-motion"; // For animations
+import Image from "next/image";
 
 // Load custom font
 const poseyFont = localFont({
@@ -190,10 +191,13 @@ const NavBar = () => {
               className="btn btn-ghost btn-circle avatar"
             >
               <div className="w-10 rounded-full">
-                <img
-                  alt="Tailwind CSS Navbar component"
-                  src="https://i.imgur.com/AJ3InNO.png"
-                />
+              <Image
+                src="https://i.imgur.com/AJ3InNO.png"
+                alt="Tailwind CSS Navbar component"
+                width={40} // Set appropriate width
+                height={40} // Set appropriate height
+                className="w-10 rounded-full"
+              />
               </div>
             </div>
           </motion.div>

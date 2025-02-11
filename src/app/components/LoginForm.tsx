@@ -115,7 +115,7 @@ export default function LoginForm() {
                 htmlFor="username"
                 className="block text-sm font-medium leading-6 text-dark dark:text-white"
               >
-                Team Username (Or your name if you're solo)
+                Team Username (Or your name if you are solo)
               </label>
               <div className="mt-2">
                 <motion.input
