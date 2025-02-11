@@ -194,8 +194,8 @@ const NavBar = () => {
               <Image
                 src="https://i.imgur.com/AJ3InNO.png"
                 alt="Tailwind CSS Navbar component"
-                width={40} // Set appropriate width
-                height={40} // Set appropriate height
+                width={40}
+                height={40}
                 className="w-10 rounded-full"
               />
               </div>

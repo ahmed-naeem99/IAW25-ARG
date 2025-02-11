@@ -4,6 +4,7 @@ import React from "react";
 import { useRouter } from "next/navigation";
 import { useState, ChangeEvent } from "react";
 import Image from "next/image";
+import { motion } from "framer-motion"; // For animations
 
 export default function RegisterForm() {
   const [fullName, setFullName] = useState("");
@@ -138,10 +139,15 @@ export default function RegisterForm() {
   };
 
   return (
-    <div className="grid place-items-center">
+    <div className="grid place-items-center min-h-screen bg-gradient-to-b from-gray-900 to-gray-800">
       <div className="flex flex-1 flex-col justify-center pb-16 lg:px-8">
-        <div className="sm:mx-auto sm:w-full sm:max-w-sm flex flex-col items-center">
-          {/* Updated Logo */}
+        <motion.div
+          initial={{ opacity: 0, y: -50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="sm:mx-auto sm:w-full sm:max-w-sm flex flex-col items-center"
+        >
+          {/* Logo */}
           <div style={{ width: 250, height: 175, position: "relative" }}>
             <Image
               src="/3.svg"
@@ -151,38 +157,58 @@ export default function RegisterForm() {
               priority
             />
           </div>
-          <h2 className="px-2 mt-12 text-center text-2xl font-bold leading-9 tracking-tight text-dark dark:text-white">
+          <motion.h2
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="px-2 mt-12 text-center text-2xl font-bold leading-9 tracking-tight text-white"
+          >
             Create a New Team Account
-          </h2>
-          <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+            className="mt-2 text-sm text-gray-400"
+          >
             Register your team here.
-          </p>
-        </div>
+          </motion.p>
+        </motion.div>
 
-        <div className="mt-10 sm:mx-auto sm:w-full max-w-xs flex flex-col">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5, delay: 0.6 }}
+          className="mt-10 sm:mx-auto sm:w-full max-w-xs flex flex-col"
+        >
           <div className="space-y-6">
             {/* Full Name Field */}
             <div>
               <label
                 htmlFor="fullName"
-                className="block text-sm font-medium leading-6 text-dark dark:text-white"
+                className="block text-sm font-medium leading-6 text-white"
               >
                 Full Name
               </label>
               <div className="mt-2">
-                <input
+                <motion.input
                   id="fullName"
                   name="fullName"
                   type="text"
                   autoComplete="name"
                   onChange={(e) => setFullName(e.target.value)}
                   required
-                  className="block px-3 w-full rounded-md border-0 bg-black/5 dark:bg-white/5 py-1.5 text-black dark:text-white shadow-sm ring-1 ring-inset ring-black/5 dark:ring-white/10 focus:ring-2 focus:ring-inset focus:ring-sky-500 sm:text-sm sm:leading-6"
+                  className="block px-3 w-full rounded-md border-0 bg-white/5 py-1.5 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-sky-500 sm:text-sm sm:leading-6"
+                  whileFocus={{ scale: 1.02 }}
                 />
                 {errorMessages.fullName && (
-                  <p className="text-red-500 pt-3 w-full max-w-xs">
+                  <motion.p
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="text-red-500 pt-3 w-full max-w-xs"
+                  >
                     {errorMessages.fullName}
-                  </p>
+                  </motion.p>
                 )}
               </div>
             </div>
@@ -191,19 +217,20 @@ export default function RegisterForm() {
             <div>
               <label
                 htmlFor="teamStatus"
-                className="block text-sm font-medium leading-6 text-dark dark:text-white"
+                className="block text-sm font-medium leading-6 text-white"
               >
                 Team Status
               </label>
               <div className="mt-2">
-                <select
+                <motion.select
                   id="teamStatus"
                   name="teamStatus"
                   value={teamStatus}
                   onChange={(e) =>
                     setTeamStatus(e.target.value as "team" | "solo")
                   }
-                  className="block px-3 w-full rounded-md border-0 bg-black/5 dark:bg-white/5 py-1.5 text-black dark:text-white shadow-sm ring-1 ring-inset ring-black/5 dark:ring-white/10 focus:ring-2 focus:ring-inset focus:ring-sky-500 sm:text-sm sm:leading-6"
+                  className="block px-3 w-full rounded-md border-0 bg-white/5 py-1.5 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-sky-500 sm:text-sm sm:leading-6"
+                  whileFocus={{ scale: 1.02 }}
                 >
                   <option value="team" className="text-black">
                     I am already part of a team
@@ -211,7 +238,7 @@ export default function RegisterForm() {
                   <option value="solo" className="text-black">
                     I am solo
                   </option>
-                </select>
+                </motion.select>
               </div>
             </div>
 
@@ -220,24 +247,29 @@ export default function RegisterForm() {
               <div>
                 <label
                   htmlFor="username"
-                  className="block text-sm font-medium leading-6 text-dark dark:text-white"
+                  className="block text-sm font-medium leading-6 text-white"
                 >
                   Team Name
                 </label>
                 <div className="mt-2">
-                  <input
+                  <motion.input
                     id="username"
                     name="username"
                     type="text"
                     autoComplete="username"
                     onChange={(e) => setUsername(e.target.value)}
                     required
-                    className="block px-3 w-full rounded-md border-0 bg-black/5 dark:bg-white/5 py-1.5 text-black dark:text-white shadow-sm ring-1 ring-inset ring-black/5 dark:ring-white/10 focus:ring-2 focus:ring-inset focus:ring-sky-500 sm:text-sm sm:leading-6"
+                    className="block px-3 w-full rounded-md border-0 bg-white/5 py-1.5 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-sky-500 sm:text-sm sm:leading-6"
+                    whileFocus={{ scale: 1.02 }}
                   />
                   {errorMessages.username && (
-                    <p className="text-red-500 pt-3 w-full max-w-xs">
+                    <motion.p
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className="text-red-500 pt-3 w-full max-w-xs"
+                    >
                       {errorMessages.username}
-                    </p>
+                    </motion.p>
                   )}
                 </div>
               </div>
@@ -247,24 +279,29 @@ export default function RegisterForm() {
             <div>
               <label
                 htmlFor="email"
-                className="block text-sm font-medium leading-6 text-dark dark:text-white"
+                className="block text-sm font-medium leading-6 text-white"
               >
                 Email address
               </label>
               <div className="mt-2">
-                <input
+                <motion.input
                   id="email"
                   name="email"
                   type="text"
                   autoComplete="email"
                   onChange={(e) => setEmail(e.target.value)}
                   required
-                  className="block px-3 w-full rounded-md border-0 bg-black/5 dark:bg-white/5 py-1.5 text-black dark:text-white shadow-sm ring-1 ring-inset ring-black/5 dark:ring-white/10 focus:ring-2 focus:ring-inset focus:ring-sky-500 sm:text-sm sm:leading-6"
+                  className="block px-3 w-full rounded-md border-0 bg-white/5 py-1.5 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-sky-500 sm:text-sm sm:leading-6"
+                  whileFocus={{ scale: 1.02 }}
                 />
                 {errorMessages.email && (
-                  <p className="text-red-500 pt-3 w-full max-w-xs">
+                  <motion.p
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="text-red-500 pt-3 w-full max-w-xs"
+                  >
                     {errorMessages.email}
-                  </p>
+                  </motion.p>
                 )}
               </div>
             </div>
@@ -274,19 +311,20 @@ export default function RegisterForm() {
               <div>
                 <label
                   htmlFor="teamMembers"
-                  className="block text-sm font-medium leading-6 text-dark dark:text-white"
+                  className="block text-sm font-medium leading-6 text-white"
                 >
                   Number of Team Members
                 </label>
                 <div className="mt-2">
-                  <input
+                  <motion.input
                     id="teamMembers"
                     name="teamMembers"
                     type="number"
                     min="1"
                     onChange={(e) => setTeamMembers(e.target.value)}
                     required
-                    className="block px-3 w-full rounded-md border-0 bg-black/5 dark:bg-white/5 py-1.5 text-black dark:text-white shadow-sm ring-1 ring-inset ring-black/5 dark:ring-white/10 focus:ring-2 focus:ring-inset focus:ring-sky-500 sm:text-sm sm:leading-6"
+                    className="block px-3 w-full rounded-md border-0 bg-white/5 py-1.5 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-sky-500 sm:text-sm sm:leading-6"
+                    whileFocus={{ scale: 1.02 }}
                   />
                 </div>
               </div>
@@ -297,25 +335,30 @@ export default function RegisterForm() {
               <div className="flex items-center justify-between">
                 <label
                   htmlFor="password"
-                  className="block text-sm font-medium leading-6 text-dark dark:text-white"
+                  className="block text-sm font-medium leading-6 text-white"
                 >
                   Password
                 </label>
               </div>
               <div className="mt-2">
-                <input
+                <motion.input
                   id="password"
                   name="password"
                   type="password"
                   autoComplete="password"
                   onChange={(e) => setPassword(e.target.value)}
                   required
-                  className="block px-3 w-full rounded-md border-0 bg-black/5 dark:bg-white/5 py-1.5 text-black dark:text-white shadow-sm ring-1 ring-inset ring-black/5 dark:ring-white/10 focus:ring-2 focus:ring-inset focus:ring-sky-500 sm:text-sm sm:leading-6"
+                  className="block px-3 w-full rounded-md border-0 bg-white/5 py-1.5 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-sky-500 sm:text-sm sm:leading-6"
+                  whileFocus={{ scale: 1.02 }}
                 />
                 {errorMessages.password && (
-                  <p className="text-red-500 pt-3 w-full max-w-xs">
+                  <motion.p
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="text-red-500 pt-3 w-full max-w-xs"
+                  >
                     {errorMessages.password}
-                  </p>
+                  </motion.p>
                 )}
               </div>
             </div>
@@ -324,27 +367,28 @@ export default function RegisterForm() {
               <div className="flex items-center justify-between">
                 <label
                   htmlFor="password"
-                  className="block text-sm font-medium leading-6 text-dark dark:text-white"
+                  className="block text-sm font-medium leading-6 text-white"
                 >
                   Re-enter Password
                 </label>
               </div>
               <div className="mt-2 pb-6">
-                <input
+                <motion.input
                   id="password"
                   name="password"
                   type="password"
                   autoComplete="password"
                   onChange={(e) => setRePassword(e.target.value)}
                   required
-                  className="block px-3 w-full rounded-md border-0 bg-black/5 dark:bg-white/5 py-1.5 text-black dark:text-white shadow-sm ring-1 ring-inset ring-black/5 dark:ring-white/10 focus:ring-2 focus:ring-inset focus:ring-sky-500 sm:text-sm sm:leading-6"
+                  className="block px-3 w-full rounded-md border-0 bg-white/5 py-1.5 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-sky-500 sm:text-sm sm:leading-6"
+                  whileFocus={{ scale: 1.02 }}
                 />
               </div>
             </div>
 
             {/* Sign Up Button */}
             <div>
-              <button
+              <motion.button
                 onClick={handleSignUp}
                 disabled={
                   !fullName ||
@@ -354,12 +398,14 @@ export default function RegisterForm() {
                   (teamStatus === "team" && (!username || !teamMembers))
                 }
                 className="disabled:opacity-40 flex w-full justify-center rounded-md bg-sky-800 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-sky-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
               >
                 Sign Up
-              </button>
+              </motion.button>
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </div>
   );
