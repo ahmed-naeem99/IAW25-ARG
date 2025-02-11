@@ -55,11 +55,6 @@ const NavBar = async () => {
                     C2
                   </Link>
                 </li>
-                <li>
-                  <Link className="dark:focus:text-white" href="/mission3">
-                    C3
-                  </Link>
-                </li>
               </ul>
             </li>
             <li>
@@ -106,14 +101,6 @@ const NavBar = async () => {
                     href="/mission2"
                   >
                     C2
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    className="dark:focus:text-white text-white"
-                    href="/mission3"
-                  >
-                    C3
                   </Link>
                 </li>
               </ul>
