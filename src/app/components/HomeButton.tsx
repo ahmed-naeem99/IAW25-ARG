@@ -15,7 +15,7 @@ const HomeButton = () => {
   const session = useSession() as any;
 
   const handleNavigation = () => {
-    console.log("Session Status (Production):", session.status);
+    console.log("Session Data (Full):", session.data);
     console.log("User Data (Production):", session.data?.user);
   
     if (session.status == "authenticated") {
