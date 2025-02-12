@@ -19,7 +19,7 @@ const HomeButton = () => {
       if (session.data?.user?.mission !== undefined && session.data.user.mission !== -1) {
         router.push(`/mission${session.data.user.mission}`);
       } else {
-        router.push("/leaderboard");
+        router.push("/mission1");
       }
     } else {
       router.push("/login");

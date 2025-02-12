@@ -13,7 +13,6 @@ export default function RegisterForm() {
   const [password, setPassword] = useState("");
   const [rePassword, setRePassword] = useState("");
   const [teamMembers, setTeamMembers] = useState("");
-  const [teamStatus, setTeamStatus] = useState<"team" | "solo">("team");
   const [isUserValid, setIsUserValid] = useState(true);
   const [isEmailValid, setIsEmailValid] = useState(true);
   const [isPasswordValid, setIsPasswordValid] = useState(true);
@@ -120,9 +119,9 @@ export default function RegisterForm() {
         body: JSON.stringify({
           fullName,
           email,
-          username: teamStatus === "solo" ? fullName : username,
+          username,
           password,
-          teamMembers: teamStatus === "team" ? teamMembers : "1",
+          teamMembers: teamMembers || "1", // Default to 1 if teamMembers is not provided
         }),
       });
       console.log("Response status:", response.status);
@@ -171,7 +170,7 @@ export default function RegisterForm() {
             transition={{ duration: 0.5, delay: 0.4 }}
             className="mt-2 text-sm text-gray-400"
           >
-            Register your team here.
+            Register your team here. If you are solo, create a team name for yourself.
           </motion.p>
         </motion.div>
 
@@ -213,67 +212,36 @@ export default function RegisterForm() {
               </div>
             </div>
 
-            {/* Team Status Dropdown */}
+            {/* Team Name Field */}
             <div>
               <label
-                htmlFor="teamStatus"
+                htmlFor="username"
                 className="block text-sm font-medium leading-6 text-white"
               >
-                Team Status
+                Team Name
               </label>
               <div className="mt-2">
-                <motion.select
-                  id="teamStatus"
-                  name="teamStatus"
-                  value={teamStatus}
-                  onChange={(e) =>
-                    setTeamStatus(e.target.value as "team" | "solo")
-                  }
+                <motion.input
+                  id="username"
+                  name="username"
+                  type="text"
+                  autoComplete="username"
+                  onChange={(e) => setUsername(e.target.value)}
+                  required
                   className="block px-3 w-full rounded-md border-0 bg-white/5 py-1.5 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-sky-500 sm:text-sm sm:leading-6"
                   whileFocus={{ scale: 1.02 }}
-                >
-                  <option value="team" className="text-black">
-                    I am already part of a team
-                  </option>
-                  <option value="solo" className="text-black">
-                    I am solo
-                  </option>
-                </motion.select>
+                />
+                {errorMessages.username && (
+                  <motion.p
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="text-red-500 pt-3 w-full max-w-xs"
+                  >
+                    {errorMessages.username}
+                  </motion.p>
+                )}
               </div>
             </div>
-
-            {/* Team Name Field (Conditional) */}
-            {teamStatus === "team" && (
-              <div>
-                <label
-                  htmlFor="username"
-                  className="block text-sm font-medium leading-6 text-white"
-                >
-                  Team Name
-                </label>
-                <div className="mt-2">
-                  <motion.input
-                    id="username"
-                    name="username"
-                    type="text"
-                    autoComplete="username"
-                    onChange={(e) => setUsername(e.target.value)}
-                    required
-                    className="block px-3 w-full rounded-md border-0 bg-white/5 py-1.5 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-sky-500 sm:text-sm sm:leading-6"
-                    whileFocus={{ scale: 1.02 }}
-                  />
-                  {errorMessages.username && (
-                    <motion.p
-                      initial={{ opacity: 0, y: -10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      className="text-red-500 pt-3 w-full max-w-xs"
-                    >
-                      {errorMessages.username}
-                    </motion.p>
-                  )}
-                </div>
-              </div>
-            )}
 
             {/* Email Field */}
             <div>
@@ -306,29 +274,27 @@ export default function RegisterForm() {
               </div>
             </div>
 
-            {/* Team Members Field (Conditional) */}
-            {teamStatus === "team" && (
-              <div>
-                <label
-                  htmlFor="teamMembers"
-                  className="block text-sm font-medium leading-6 text-white"
-                >
-                  Number of Team Members
-                </label>
-                <div className="mt-2">
-                  <motion.input
-                    id="teamMembers"
-                    name="teamMembers"
-                    type="number"
-                    min="1"
-                    onChange={(e) => setTeamMembers(e.target.value)}
-                    required
-                    className="block px-3 w-full rounded-md border-0 bg-white/5 py-1.5 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-sky-500 sm:text-sm sm:leading-6"
-                    whileFocus={{ scale: 1.02 }}
-                  />
-                </div>
+            {/* Team Members Field */}
+            <div>
+              <label
+                htmlFor="teamMembers"
+                className="block text-sm font-medium leading-6 text-white"
+              >
+                Number of Team Members
+              </label>
+              <div className="mt-2">
+                <motion.input
+                  id="teamMembers"
+                  name="teamMembers"
+                  type="number"
+                  min="1"
+                  onChange={(e) => setTeamMembers(e.target.value)}
+                  required
+                  className="block px-3 w-full rounded-md border-0 bg-white/5 py-1.5 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-sky-500 sm:text-sm sm:leading-6"
+                  whileFocus={{ scale: 1.02 }}
+                />
               </div>
-            )}
+            </div>
 
             {/* Password Fields */}
             <div>
@@ -393,9 +359,10 @@ export default function RegisterForm() {
                 disabled={
                   !fullName ||
                   !email ||
+                  !username ||
                   !password ||
                   !rePassword ||
-                  (teamStatus === "team" && (!username || !teamMembers))
+                  !teamMembers
                 }
                 className="disabled:opacity-40 flex w-full justify-center rounded-md bg-sky-800 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-sky-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
                 whileHover={{ scale: 1.05 }}
