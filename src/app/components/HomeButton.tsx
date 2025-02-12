@@ -20,11 +20,14 @@ const HomeButton = () => {
   
     if (session.status == "authenticated") {
       if (session.data?.user?.mission !== undefined && session.data.user.mission !== -1) {
+        console.log("going to random mission")
         router.push(`/mission${session.data.user.mission}`);
       } else {
+        console.log("going to 1st mission")
         router.push("/mission1");
       }
     } else {
+      console.log("going to login")
       router.push("/login");
     }
   };
