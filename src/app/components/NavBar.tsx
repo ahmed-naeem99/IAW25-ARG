@@ -1,7 +1,6 @@
 "use client"; // Mark this as a Client Component
 import React from "react";
 import Link from "next/link";
-import ThemeToggle from "./ThemeToggle";
 import localFont from "next/font/local";
 import { useSession } from "next-auth/react";
 import Logout from "./logout";
@@ -21,7 +20,7 @@ const NavBar = () => {
       initial={{ opacity: 0, y: -50 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      className="navbar dark:text-white dark:focus:text-white transition-colors rounded-3xl"
+      className="navbar dark:text-white dark:focus:text-white transition-colors rounded-3xl bg-gradient-to-b from-gray-900 to-gray-800"
     >
       <div className="navbar-start">
         <div className="dropdown">
@@ -180,7 +179,6 @@ const NavBar = () => {
       </div>
       <div className="navbar-end">
         <div className="dropdown dropdown-end flex flex-row space-x-2 sm:space-x-4 items-center">
-          <ThemeToggle />
           <motion.div
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
@@ -191,13 +189,13 @@ const NavBar = () => {
               className="btn btn-ghost btn-circle avatar"
             >
               <div className="w-10 rounded-full">
-              <Image
-                src="https://i.imgur.com/AJ3InNO.png"
-                alt="Tailwind CSS Navbar component"
-                width={40}
-                height={40}
-                className="w-10 rounded-full"
-              />
+                <Image
+                  src="https://i.imgur.com/AJ3InNO.png"
+                  alt="Tailwind CSS Navbar component"
+                  width={40}
+                  height={40}
+                  className="w-10 rounded-full"
+                />
               </div>
             </div>
           </motion.div>

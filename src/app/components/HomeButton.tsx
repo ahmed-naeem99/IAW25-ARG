@@ -27,7 +27,7 @@ const HomeButton = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 text-white">
+    <div className="max-h-screen bg-gradient-to-b from-gray-900 to-gray-800 text-white">
       {/* Hero Section */}
       <div className="flex flex-col items-center justify-center h-screen text-center px-4">
         <motion.h1

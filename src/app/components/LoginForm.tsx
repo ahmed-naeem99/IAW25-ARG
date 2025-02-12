@@ -79,7 +79,7 @@ export default function LoginForm() {
 
   return (
     <div className="grid place-items-center min-h-screen bg-gradient-to-b from-gray-900 to-gray-800">
-      <div className="flex flex-1 flex-col justify-center pb-16 lg:px-8">
+      <div className="flex flex-1 flex-col pb-16 lg:px-8 pt-4">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm flex flex-col items-center">
           <motion.div
             initial={{ opacity: 0, y: -50 }}
@@ -87,10 +87,10 @@ export default function LoginForm() {
             transition={{ duration: 0.5 }}
           >
             <Image
-              src="/3.svg"
+              src="/4.png"
               alt="Islamic Awareness Week Logo"
-              width={150}
-              height={150}
+              width={225}
+              height={225}
             />
           </motion.div>
           <motion.h2
