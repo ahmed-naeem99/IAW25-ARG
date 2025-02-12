@@ -1,11 +1,11 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { signIn } from "next-auth/react";
 import Image from "next/image";
-import { motion } from "framer-motion"; // For animations
+import { motion } from "framer-motion";
 
 export default function LoginForm() {
   const [username, setUsername] = useState("");
@@ -18,6 +18,11 @@ export default function LoginForm() {
   });
 
   const router = useRouter();
+
+  useEffect(() => {
+    // Ensure client-side logic runs after the component mounts
+    console.log("Component mounted");
+  }, []);
 
   const handleLogin = async () => {
     setErrorMessages({ username: "", password: "", general: "" });
@@ -91,6 +96,7 @@ export default function LoginForm() {
               alt="Islamic Awareness Week Logo"
               width={225}
               height={225}
+              priority
             />
           </motion.div>
           <motion.h2
