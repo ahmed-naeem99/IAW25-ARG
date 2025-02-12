@@ -18,8 +18,8 @@ const HomeButton = () => {
     console.log("Session Status (Production):", session.status);
     console.log("User Data (Production):", session.data?.user);
   
-    if (session.status === "authenticated") {
-      if (session.data.user.mission !== -1) {
+    if (session.status == "authenticated") {
+      if (session.data?.user?.mission !== undefined || session.data.user.mission !== -1) {
         router.push(`/mission${session.data.user.mission}`);
       } else {
         router.push("/mission1");
