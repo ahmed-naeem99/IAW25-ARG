@@ -14,31 +14,33 @@ const HomeButton = () => {
   const router = useRouter();
   const session = useSession() as any;
 
-  const handleNavigation = () => {
-    // Ensure session status is up-to-date
-  if (session.status === "loading") {
-    console.log("Session is loading...");
-    return; // Prevent navigation until session state stabilizes
-  }
-
-    console.log("Session Status (Production):", session.status);
-    console.log("User Data (Production):", session.data?.user);
+  const handleNavigation = async () => {
+    console.log("Starting navigation...");
+    console.log("Session Status:", session.status);
+    console.log("Session Data:", session.data);
+  
+    if (session.status === "loading") {
+      console.log("Session is still loading...");
+      return;
+    }
   
     if (session.status === "authenticated") {
-      console.log("Authenticated user:", session.data?.user);
-      if (session.data?.user?.mission !== undefined && session.data.user.mission !== -1) {
-        console.log(`Navigating to mission${session.data.user.mission}`);
-        router.replace(`/mission${session.data.user.mission}`);
+      const mission = session.data?.user?.mission;
+      console.log("User is authenticated. Mission:", mission);
+  
+      if (mission !== undefined && mission !== -1) {
+        console.log(`Redirecting to mission${mission}`);
+        router.replace(`/mission${mission}`);
       } else {
-        console.log("Navigating to mission1");
+        console.log("Redirecting to mission1");
         router.replace("/mission1");
       }
     } else {
-      console.log("User not authenticated, redirecting to login");
+      console.log("User not authenticated, redirecting to login...");
       router.replace("/login");
     }
-    
   };
+  
 
   return (
     <div className="max-h-screen bg-gradient-to-b from-gray-900 to-gray-800 text-white">
