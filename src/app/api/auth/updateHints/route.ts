@@ -4,6 +4,7 @@ import { sql } from "@vercel/postgres";
 export async function POST(request: Request) {
   try {
     const req = await request.json();
+    console.log(req)
 
     const columnName = `hints${req.currMiss}used`;
 

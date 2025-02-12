@@ -7,7 +7,7 @@ export async function POST(request: Request) {
 
     const response = await sql`
     UPDATE users
-    SET currentmission = ${req.setMission}, timecompleted = CURRENT_TIMESTAMP AT TIME ZONE 'America/New_York'
+    SET mission = ${req.setMission}, timecompleted = CURRENT_TIMESTAMP AT TIME ZONE 'America/New_York'
     WHERE username = ${req.username};
       `;
 

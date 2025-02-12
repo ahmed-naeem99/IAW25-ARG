@@ -23,6 +23,7 @@ const handler = NextAuth({
         const response = await sql`
         SELECT * FROM users WHERE username=${credentials?.username}`;
         const user = response.rows[0];
+        console.log(user)
 
         if (user) {
           const passwordCorrect = await compare(
@@ -34,10 +35,9 @@ const handler = NextAuth({
             return {
               id: user.id,
               username: user.username,
-              mission: user.currentmission,
+              mission: user.mission,
               hints1used: user.hints1used,
               hints2used: user.hints2used,
-              hints3used: user.hints3used,
             };
           } else {
             throw new Error("IncorrectPassword");
@@ -66,9 +66,6 @@ const handler = NextAuth({
       }
       if (trigger === "update" && session?.hints2used) {
         (token.user as any).hints2used = session.hints2used;
-      }
-      if (trigger === "update" && session?.hints3used) {
-        (token.user as any).hints3used = session.hints3used;
       }
       return token;
     },

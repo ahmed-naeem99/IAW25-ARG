@@ -57,7 +57,7 @@ const NavBar = () => {
                 >
                   <Link
                     className="dark:focus:text-white dark:text-white"
-                    href="/mission1"
+                    href="/mission/1"
                   >
                     C1
                   </Link>
@@ -66,7 +66,7 @@ const NavBar = () => {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  <Link className="dark:focus:text-white" href="/mission2">
+                  <Link className="dark:focus:text-white" href="/mission/2">
                     C2
                   </Link>
                 </motion.li>
@@ -123,7 +123,7 @@ const NavBar = () => {
                 >
                   <Link
                     className="dark:focus:text-white text-white"
-                    href="/mission1"
+                    href="/mission/1"
                   >
                     C1
                   </Link>
@@ -134,7 +134,7 @@ const NavBar = () => {
                 >
                   <Link
                     className="dark:focus:text-white text-white"
-                    href="/mission2"
+                    href="/mission/2"
                   >
                     C2
                   </Link>

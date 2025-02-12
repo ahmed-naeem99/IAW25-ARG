@@ -12,23 +12,18 @@ const poseyFont = localFont({
 
 const HomeButton = () => {
   const router = useRouter();
-  const session = useSession() as any;
+  const {data:session,status} = useSession() as any;
 
   const handleNavigation = () => {
-    console.log("Session Data (Full):", session.data);
-    console.log("User Data (Production):", session.data?.user);
-  
-    if (session.status == "authenticated") {
-      if (session.data?.user?.mission !== undefined && session.data.user.mission !== -1) {
-        console.log("Going to random mission");
-        window.location.href = `/mission${session.data.user.mission}`; // Full reload for the mission
-      } else {
-        console.log("Going to 1st mission");
-        window.location.href = "/mission1"; // Full reload for the first mission
-      }
+    if (status != "authenticated") {
+      router.push("/login");
+      return;
+    }
+
+    if (session.user.mission != -1) {
+      router.push("/mission/" + session.user.mission);
     } else {
-      console.log("Going to login");
-      window.location.href = "/login"; // Full reload for login
+      router.push("/leaderboard");
     }
   };
   

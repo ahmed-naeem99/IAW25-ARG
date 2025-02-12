@@ -39,7 +39,7 @@ export default function LoginForm() {
 
       if (!response?.error) {
         setErrorMessages({ username: "", password: "", general: "" });
-        router.push("/mission1");
+        router.push("/");
       } else {
         switch (response.error) {
           case "InvalidUsername":

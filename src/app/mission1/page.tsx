@@ -85,6 +85,9 @@ const Mission1Page = () => {
   };
 
   const handleM1Submit = async () => {
+
+    console.log(session.user)
+
     if (
       (submission === "Izz al-Din ibn 'Abd al-Salam" ||
         submission === "Izz al Din ibn 'Abd al-Salam") &&
@@ -110,7 +113,7 @@ const Mission1Page = () => {
         setIsGreen(false);
         setSubmitMessage("An error has occurred. Please try again.");
       }
-    } else if (!(session.user.mission === 1)) {
+    } else if (session.user.mission != 1) {
       setIsGreen(false);
       setCanUseHint1(false);
       setCanUseHint2(false);
