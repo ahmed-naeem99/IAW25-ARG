@@ -86,8 +86,8 @@ const Mission1Page = () => {
 
   const handleM1Submit = async () => {
     if (
-      (submission === "Talha ibn Ubayd Allah" ||
-        submission === "Talha ibn 'Ubayd Allah") &&
+      (submission === "Izz al-Din ibn 'Abd al-Salam" ||
+        submission === "Izz al Din ibn 'Abd al-Salam") &&
       session.user.mission === 1
     ) {
       const response = await fetch("/api/auth/updateMission", {
@@ -137,13 +137,13 @@ const Mission1Page = () => {
         Your browser does not support the video tag.
       </video> */}
       <div className="flex flex-col items-center text-center sm:w-3/4 w-full overflow-auto ">
-        <iframe
-          className="w-full h-full "
-          src="https://www.youtube.com/embed/vvEvBzUisXs"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowFullScreen
-          title="Mission 1 Video"
-        ></iframe>
+      <iframe
+        className="w-full h-full"
+        src="https://drive.google.com/file/d/19j6ObcDf95_rMN_NckOIIdQ-HWfV03as/preview"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowFullScreen
+        title="Mission 1 Video"
+      ></iframe>
         <div
           className={`dark:text-white text-black text-2xl py-8 ${poseyFont.className}`}
         >
@@ -182,8 +182,7 @@ const Mission1Page = () => {
           </button>
           {showHint1 && (
             <p className="text-white w-full">
-              Did you find the link hidden in the video? Those numbers in the
-              end are hexadecimal; they can be converted...
+              The clues are on screens. It dissapears and reappears.
             </p>
           )}
           <button
@@ -196,7 +195,7 @@ const Mission1Page = () => {
           {showHint2 && (
             <p className="text-white w-full">
               {" "}
-              The posters symbolize events from the Seerah; put them in order.
+              Those are not normal numbers
             </p>
           )}
           <button
@@ -209,8 +208,7 @@ const Mission1Page = () => {
           {showHint3 && (
             <p className="text-white w-full">
               {" "}
-              Black screen? Or is it? Play around with the brightness and
-              contrast.
+              You might need a laptop. Binary is tricky to decode.
             </p>
           )}
         </div>

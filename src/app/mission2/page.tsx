@@ -85,7 +85,7 @@ const Mission2Page = () => {
   };
 
   const handleM2Submit = async () => {
-    if (submission === "Ahmad ibn Hanbal" && session.user.mission === 2) {
+    if (submission === "Al Imran" && session.user.mission === 2) {
       const response = await fetch("/api/auth/updateMission", {
         method: "POST",
         body: JSON.stringify({
@@ -131,14 +131,12 @@ const Mission2Page = () => {
   return (
     <div className="h-full justify-center pb-16 sm:mx-auto sm:w-full sm:max-w-sm flex flex-col items-center ">
       <div className="flex flex-col items-center text-center w-full overflow-auto ">
-        <iframe
-          className="w-full h-full"
-          src="https://www.youtube.com/embed/5yP4FtvkkKw?si=WvxWZzLzq6kUs_qn"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowFullScreen
-          title="Mission 2 Video"
-        ></iframe>
-
+      <iframe
+        className="w-full h-full"
+        src="https://panoraven.com/en/embed/yPsvGiaVtO"
+        allow="fullscreen"
+        title="Mission 2 Interactive Content"
+      ></iframe>
         <div
           className={`dark:text-white text-black text-2xl py-8 ${poseyFont.className}`}
         >
@@ -177,9 +175,7 @@ const Mission2Page = () => {
           </button>
           {showHint1 && (
             <p className="text-white w-full">
-              Riddle me this Riddle me that! What it&apos;s saying is that you
-              need to find the place in the convention that people stand in
-              lines. Here&apos;s the hint: the big magical stairs.
+              Hmm. 10 numbers in a row. Looks like a phone number. Try calling it.
             </p>
           )}
 
@@ -192,7 +188,7 @@ const Mission2Page = () => {
           </button>
           {showHint2 && (
             <p className="text-white w-full">
-              The video had two pauses; which letters were replaced?
+              Suspicious audio files are either morse code or a spectogram.
             </p>
           )}
 
@@ -205,7 +201,7 @@ const Mission2Page = () => {
           </button>
           {showHint3 && (
             <p className="text-white w-full">
-              What happens if you overlay the two maps. Also horse code
+              Ciphers can be symbols too...
             </p>
           )}
         </div>
