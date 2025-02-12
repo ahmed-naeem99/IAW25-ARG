@@ -15,18 +15,29 @@ const HomeButton = () => {
   const session = useSession() as any;
 
   const handleNavigation = () => {
+    // Ensure session status is up-to-date
+  if (session.status === "loading") {
+    console.log("Session is loading...");
+    return; // Prevent navigation until session state stabilizes
+  }
+
     console.log("Session Status (Production):", session.status);
     console.log("User Data (Production):", session.data?.user);
   
     if (session.status === "authenticated") {
+      console.log("Authenticated user:", session.data?.user);
       if (session.data?.user?.mission !== undefined && session.data.user.mission !== -1) {
-        router.push(`/mission${session.data.user.mission}`);
+        console.log(`Navigating to mission${session.data.user.mission}`);
+        router.replace(`/mission${session.data.user.mission}`);
       } else {
-        router.push("/mission1");
+        console.log("Navigating to mission1");
+        router.replace("/mission1");
       }
     } else {
-      router.push("/login");
+      console.log("User not authenticated, redirecting to login");
+      router.replace("/login");
     }
+    
   };
 
   return (
