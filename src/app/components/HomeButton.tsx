@@ -24,6 +24,7 @@ const HomeButton = () => {
         router.replace(`/mission${session.data.user.mission}`);
       } else {
         console.log("going to 1st mission")
+        router.refresh
         router.replace("/mission1");
       }
     } else {
