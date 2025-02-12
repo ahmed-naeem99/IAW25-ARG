@@ -15,21 +15,15 @@ const HomeButton = () => {
   const session = useSession() as any;
 
   const handleNavigation = () => {
-    console.log("Session Data (Full):", session.data);
-    console.log("User Data (Production):", session.data?.user);
-  
-    if (session.status == "authenticated") {
-      if (session.data?.user?.mission !== undefined && session.data.user.mission !== -1) {
-        console.log("going to random mission")
-        router.replace(`/mission${session.data.user.mission}`);
-      } else {
-        console.log("going to 1st mission")
-        router.refresh
-        router.replace("/mission1");
-      }
+    if (status != "authenticated") {
+      router.push("/login");
+      return;
+    }
+
+    if (session.user.mission != -1) {
+      router.push("/mission/" + session.user.mission);
     } else {
-      console.log("going to login")
-      router.replace("/login");
+      router.push("/leaderboard");
     }
   };
 
