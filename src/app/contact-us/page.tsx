@@ -31,7 +31,7 @@ const ContactUsPage = () => {
           whileTap={{ scale: 0.95 }}
           className="text-lg sm:text-2xl mb-8"
         >
-          Have any questions or feedback? We'd love to hear from you!
+          Have any questions or feedback? We would love to hear from you!
         </motion.p>
         <motion.div
           whileHover={{ scale: 1.05 }}
