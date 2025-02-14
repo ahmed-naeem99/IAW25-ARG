@@ -96,6 +96,11 @@ const NavBar = () => {
                 FAQs
               </Link>
             </motion.li>
+            <motion.li whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+              <Link className="dark:focus:text-white" href="/contact-us">
+                Contact Us
+              </Link>
+            </motion.li>
           </ul>
         </div>
         <Link
@@ -173,6 +178,12 @@ const NavBar = () => {
               href="/faqs"
             >
               FAQs
+            </Link>
+          </motion.li>
+          <motion.li whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+            <Link className="dark:focus:text-white dark:text-white" 
+            href="/contact-us">
+              Contact Us
             </Link>
           </motion.li>
         </ul>
