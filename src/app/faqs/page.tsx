@@ -39,10 +39,10 @@ export default function FAQs() {
           </div>
           <div>
             <h2 className={`${poseyFont.className} text-2xl font-semibold mb-2`}>
-              I'm stuck — I don't know what to do? 
+              Im stuck — I dont know what to do? 
             </h2>
             <p className="font-sans text-lg font-light leading-relaxed">
-              Patience. This competition wasn't supposed to be easy... Keep you eyes open and tackle things from different angles. Refer to digital toolbox for tips and risk a time penalty by using hints. Also, Yes, you can use ChatGPT, DeepSeek, Google whatever... This competition is about expanding your horizions not limiting them. May the most perseverant, clever and resoureful team win!            </p>
+              Patience. This competition wasnt supposed to be easy... Keep you eyes open and tackle things from different angles. Refer to digital toolbox for tips and risk a time penalty by using hints. Also, Yes, you can use ChatGPT, DeepSeek, Google whatever... This competition is about expanding your horizions not limiting them. May the most perseverant, clever and resoureful team win!            </p>
           </div>
           <div>
             <h2 className={`${poseyFont.className} text-2xl font-semibold mb-2`}>
